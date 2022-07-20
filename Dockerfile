@@ -12,6 +12,6 @@ RUN apt-get update \
 
 ADD start.sh /start.sh
 
-EXPOSE 22 1234
+EXPOSE 22
 
 CMD ["/start.sh"]
