@@ -1,10 +1,12 @@
 # qnap-git-server
 
+Origin forked from tomplus/qnap-git-server (https://github.com/tomplus/qnap-git-server)
+
 Host your own Git repositories on QNAP server
 
 ## Introduction
 
-QNAP is a linux-based Network Attached Storage. It has a lot of nice features but there is no option for hosting git repositories by default. Fortunately there is an application named _Container Station_ which allows you to run Docker or LXC images. So it’s pretty easy to extend functions and for example install _GitLab_ to host git repositories (it’s QNAP recommendation). _Gitlab_ is a quite big system and if you need a just simple git server you can use this [qnap-git-server](https://github.com/tomplus/qnap-git-server).
+QNAP is a linux-based Network Attached Storage. It has a lot of nice features but there is no option for hosting git repositories by default. Fortunately there is an application named _Container Station_ which allows you to run Docker or LXC images. So it’s pretty easy to extend functions and for example install _GitLab_ to host git repositories (it’s QNAP recommendation). _Gitlab_ is a quite big system and if you need a just simple git server you can use this [qnap-git-server](https://github.com/rma4711/qnap-git-server).
 
 ## Instalation
 
@@ -22,11 +24,11 @@ $ ssh admin@my-qnap.local
 [/share] chmod 600 git/.ssh/authorized_keys
 ```
 
-Now you can use _Container Station_ to start the image [tpimages/qnap-git-server](https://hub.docker.com/r/tpimages/qnap-git-server/). This image is prepared for arm32v7 only.
+Now you can use _Container Station_ to start the image [rma4711/qnap-git-server](https://hub.docker.com/r/rma4711/qnap-git-server/). This image is prepared for arm32v7 only.
 You have to mount prepared directory as /home/git and expose port 22 as for example 2222 to connect it from your local network. You can also start it from command line:
 
 ```
-[~] docker run -d -v /share/git:/home/git -p 2222:22 --rm tpimages/qnap-git-server:latest
+[~] docker run -d -v /share/git:/home/git -p 2222:22 --rm rma4711/qnap-git-server:latest
 ```
 
 Now your server is up and running. You can connect to it via SSH to create a bare repository:
@@ -47,12 +49,16 @@ $ git clone ssh://git@my-qnap.local:2222/pub/project.git
 
 ## Building
 
-If you want to build you own custom version of this image your can do it simple by docker build command:
+If you want to build you own custom version of this image you can do it simple by docker build command:
 
 ```
 docker build -t qnap-git-server:my-own-version .
 ```
-
+Be aware of using the right hardware to build the image!
+```
+FROM arm32v7/ubuntu:22.04
+```
+in the Dockerfile means you have to build and to run this image on an arm processor!
 
 ## Troubleshooting
 
@@ -66,10 +72,10 @@ If you get errors like `exec user process caused "exec format error"` it means t
 has different architecture (eg. amd64) than the prepared image (arm32v7). It this case try to replace
 the base image in `Dockerfile` from
 ```
-FROM arm32v7/ubuntu:14.04
+FROM arm32v7/ubuntu:22.04
 ```
 to for example:
 ```
-FROM amd64/ubuntu:14.04
+FROM amd64/ubuntu:22.04
 ```
 and build your own image.
