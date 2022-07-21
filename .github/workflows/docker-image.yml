@@ -12,7 +12,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:      
-      DOCKER_REGISTRY: rma4711      
+      DOCKER_REGISTRY: docker.io/rma4711      
       DOCKER_IMAGE: rma4711/qnap-git-server      
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
