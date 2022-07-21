@@ -49,7 +49,7 @@ jobs:
             --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} \        
             --file ./Dockerfile \        
             --output type=registry \
-            . 
+            .  
 
 # das waren die original steps 
 #    - uses: actions/checkout@v3
