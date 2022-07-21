@@ -46,9 +46,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: . 
-          platforms: ${{ DOCKER_TARGET_PLATFORM }}
+          platforms: linux/arm/v7
           push: true
-          tags: ${{ DOCKER_IMAGE }}:${{ GITHUB_RUN_NUMBER}}
+          tags: rma4711/qnap-git-server:latest
 
 #      - name: Run Buildx (push image)      
 #        if: success()      
