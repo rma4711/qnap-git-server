@@ -11,8 +11,8 @@ RUN /usr/bin/ssh-keygen -A
 RUN rm /etc/pam.d/sshd
 
 ADD start.sh /start.sh
+RUN chmod 700 /start.sh
 
 EXPOSE 22
 
-CMD ["/start.sh"]
-
+CMD ["sh /start.sh"]
