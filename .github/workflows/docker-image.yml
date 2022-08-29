@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "development", "rma4711-no-cmd" ]
   pull_request:
-    branches: [ "development" ]
+    branches: [ "development", "rma4711-no-cmd" ]
 
 jobs:
 
